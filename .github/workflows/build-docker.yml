@@ -35,3 +35,11 @@ jobs:
         tags: ghcr.io/jarvishubai/vanity-grind:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
+    - name: Make package public
+      run: |
+        curl -s -X PATCH \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/user/packages/container/vanity-grind" \
+          -d '{"visibility":"public"}' || echo "Could not set visibility"
