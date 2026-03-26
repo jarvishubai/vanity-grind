@@ -30,3 +30,5 @@ WORKDIR /root
 # ETH exact:    cd profanity2 && ./profanity2.x64 --matching deadXXXX...XXXXbeef -z SEED
 # ETH fuzzy:    cd profanity2 && ./profanity2.x64 --fuzzy "dead[8b][8b]XXXX...XXXX[8b][8b]beef" -z SEED
 # SOL:          cd solanity && export LD_LIBRARY_PATH=./src/release && ./src/release/cuda_ed25519_vanity Dav Moon
+
+# Rebuild: 1774500960 - with fuzzy fix r.score=0
