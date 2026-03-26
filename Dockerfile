@@ -32,3 +32,4 @@ WORKDIR /root
 # SOL:          cd solanity && export LD_LIBRARY_PATH=./src/release && ./src/release/cuda_ed25519_vanity Dav Moon
 
 # Rebuild: 1774500960 - with fuzzy fix r.score=0
+# Force rebuild: 1774501174 - ensure profanity2 fix eb904575
