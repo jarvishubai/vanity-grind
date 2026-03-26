@@ -7,12 +7,12 @@ RUN apt-get update -qq && \
     ldconfig && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Build Profanity2 (ETH) - compiles in ~15 sec
+# Build Profanity2 with FUZZY MATCHING PATCH (ETH) - our fork with --fuzzy flag
 RUN cd /root && \
-    git clone https://github.com/1inch/profanity2.git && \
+    git clone -b fuzzy-matching https://github.com/jarvishubai/profanity2.git && \
     cd profanity2 && make -j$(nproc)
 
-# Build Solanity with runtime prefix patch (SOL) - compiles in ~15 min at build time, 0 at runtime
+# Build Solanity with runtime prefix patch (SOL)
 RUN cd /root && \
     git clone -b runtime-prefix https://github.com/jarvishubai/solanity.git && \
     cd solanity && \
@@ -27,5 +27,6 @@ RUN mkdir -p /etc/OpenCL/vendors && \
 
 WORKDIR /root
 
-# ETH: cd profanity2 && ./profanity2.x64 --matching abcXXXXX... -z SEED
-# SOL: cd solanity && export LD_LIBRARY_PATH=./src/release && ./src/release/cuda_ed25519_vanity Dav Moon
+# ETH exact:    cd profanity2 && ./profanity2.x64 --matching deadXXXX...XXXXbeef -z SEED
+# ETH fuzzy:    cd profanity2 && ./profanity2.x64 --fuzzy "dead[8b][8b]XXXX...XXXX[8b][8b]beef" -z SEED
+# SOL:          cd solanity && export LD_LIBRARY_PATH=./src/release && ./src/release/cuda_ed25519_vanity Dav Moon
